@@ -36,7 +36,7 @@ public class CustomerController {
     @RequestMapping(value = "/{id}", method=RequestMethod.DELETE)
     public ResponseEntity delete(@PathVariable long id) {
         customerRepository.deleteById(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
 }
