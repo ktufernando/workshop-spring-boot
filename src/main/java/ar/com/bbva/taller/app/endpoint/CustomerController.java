@@ -14,8 +14,6 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    ////private static final Logger LOGGER = LoggerFactory.getLogger(CustomerController.class);
-
     @Autowired
     private CustomerRepository customerRepository;
 
