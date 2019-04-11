@@ -31,7 +31,7 @@ public class AuthorizationFilter extends GenericFilterBean {
         if (token != null && jwtProvider.validateToken(token)) {
 
             SecurityContextHolder.getContext().setAuthentication(
-                    jwtProvider.getAuthentication(token)
+                    new UsernamePasswordAuthenticationToken("pepe", "argento")
             );
 
         }
