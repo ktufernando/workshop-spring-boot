@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -21,7 +19,7 @@ public class CustomerController {
     private CustomerRepository customerRepository;
 
     @RequestMapping(method=RequestMethod.POST)
-    public @ResponseBody ResponseEntity save(@RequestBody Customer customer, HttpServletRequest request){
+    public @ResponseBody ResponseEntity save(@RequestBody Customer customer){
         return ResponseEntity.ok(customerRepository.save(customer));
     }
 
@@ -31,14 +29,14 @@ public class CustomerController {
     }
 
     @RequestMapping(method=RequestMethod.GET)
-    public @ResponseBody ResponseEntity<Iterable<Customer>> all() {
+    public @ResponseBody ResponseEntity all() {
         return ResponseEntity.ok(customerRepository.findAll());
     }
 
     @RequestMapping(value = "/{id}", method=RequestMethod.DELETE)
     public ResponseEntity delete(@PathVariable long id) {
         customerRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
 }
