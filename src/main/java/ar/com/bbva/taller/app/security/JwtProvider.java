@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by fer on 11/04/19.
@@ -23,13 +22,6 @@ public class JwtProvider {
 
     @Autowired
     private UserDetailsService userDetailsService;
-
-    /*public boolean validateToken(String token) {
-        if (token.equals("ABC")) {
-            return true;
-        }
-        return false;
-    }*/
 
     public boolean validateToken(String token) {
         try {

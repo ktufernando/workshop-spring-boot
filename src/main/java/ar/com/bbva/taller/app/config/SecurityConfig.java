@@ -50,7 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        // ensure the passwords are encoded properly
         UserDetails pepe = User.withUsername("pepe").password(passwordEncoder().encode("argento")).roles("USER").build();
         UserDetails mony = User.withUsername("mony").password(passwordEncoder().encode("argento")).roles("ADMIN").build();
         auth
@@ -61,79 +60,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser(mony);
     }
 
-    /*@Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        UserDetails pepe = User.withUsername("pepe").password(passwordEncoder().encode("argento")).roles("USER").build();
-        UserDetails mony = User.withUsername("mony").password(passwordEncoder().encode("argento")).roles("ADMIN").build();
-        auth.inMemoryAuthentication().withUser(pepe).withUser(mony);
-    }*/
-
-    /*
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-            .formLogin()
-                .and()
-            .httpBasic();
-    }*/
-
-    /*@Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                //For database console - url: jdbc:h2:mem:testdb
-                .headers().frameOptions().disable()
-                .and()
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/login").permitAll()
-                .antMatchers(HttpMethod.POST, "/logout").authenticated()
-                .antMatchers(HttpMethod.POST, "/customer").authenticated()
-                .antMatchers(HttpMethod.GET, "/customer").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/customer").denyAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/public/**").permitAll()
-                .antMatchers("/private/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/h2-console/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .and()
-                .httpBasic();
-    }*/
-
-    /*@Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .headers().frameOptions().disable()
-                .and()
-                .csrf().disable()
-
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .exceptionHandling()
-                .and()
-                .addFilterBefore(new AuthorizationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
-
-                .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/auth/signin").permitAll()
-                .antMatchers(HttpMethod.POST, "/logout").authenticated()
-                .antMatchers(HttpMethod.POST, "/customer").authenticated()
-                .antMatchers(HttpMethod.GET, "/customer").authenticated()
-                .antMatchers(HttpMethod.DELETE, "/customer").denyAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/public/**").permitAll()
-                .antMatchers("/private/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/h2-console/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin().disable()
-                .httpBasic().disable()
-                ;
-    }*/
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -160,9 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().disable()
-                .httpBasic().disable()
-        ;
+                .httpBasic().disable();
     }
-
 
 }
