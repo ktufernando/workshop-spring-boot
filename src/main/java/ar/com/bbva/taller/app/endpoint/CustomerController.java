@@ -13,16 +13,11 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(CustomerController.class);
-
     @Autowired
     private CustomerRepository customerRepository;
 
     @RequestMapping(method=RequestMethod.POST)
     public @ResponseBody Customer save(@RequestBody Customer customer){
-        LOGGER.info("************************");
-        LOGGER.info(customer.toString());
         return customerRepository.save(customer);
     }
 
@@ -31,10 +26,5 @@ public class CustomerController {
     public @ResponseBody List<Customer> byName(@PathVariable String name){
         return customerRepository.findByName(name);
     }
-
-
-
-
-
 
 }
